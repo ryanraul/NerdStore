@@ -13,9 +13,10 @@ namespace NerdStore.Catalogo.Domain
         public DateTime DataCadastro { get; private set; }
         public string Imagem { get; private set; }
         public int QuantidadeEstoque { get; private set; }
+        public Dimensoes Dimensoes { get; private set; }
         public Categoria Categoria { get; private set; }
 
-        public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem)
+        public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem, Dimensoes dimensoes)
         {
             CategoriaId = categoriaId;
             Nome = nome;
@@ -24,6 +25,7 @@ namespace NerdStore.Catalogo.Domain
             Valor = valor;
             DataCadastro = dataCadastro;
             Imagem = imagem;
+            Dimensoes = dimensoes;
 
             Validar();
         }
@@ -68,31 +70,6 @@ namespace NerdStore.Catalogo.Domain
             Validacoes.ValidarSeDiferente(CategoriaId, Guid.Empty, "O campo 'CategoriaId' do produto não pode estar vazio.");
             Validacoes.ValidarSeMenorIgualMinimo(Valor, 0, "O campo 'Valor' do produto não pode ser menor igual a 0.");
             Validacoes.ValidarSeVazio(Imagem, "O campo 'Imagem' do produto não pode estar vazio.");
-        }
-    }
-
-    public class Categoria : Entity
-    {
-        public string Nome { get; private set; }
-        public int Codigo { get; private set; }
-
-        public Categoria(string nome, int codigo)
-        {
-            Nome = nome;
-            Codigo = codigo;
-
-            Validar();
-        }
-
-        public override string ToString()
-        {
-            return $"{Nome} - {Codigo}";
-        }
-
-        public void Validar()
-        {
-            Validacoes.ValidarSeVazio(Nome, "O campo 'Nome' da categoria não pode estar vazio.");
-            Validacoes.ValidarSeIgual(Codigo, 0, "O campo 'Codigo' da categoria não pode ser 0.");            
         }
     }
 }
