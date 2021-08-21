@@ -25,7 +25,7 @@ namespace NerdStore.Catalogo.Data.Repository
         public async Task<Produto> ObterPorId(Guid id)
             => await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
 
-        public async Task<IEnumerable<Categoria>> ObterCategorias(int codigo)
+        public async Task<IEnumerable<Categoria>> ObterCategorias()
             => await _context.Categorias.AsNoTracking().ToListAsync();
 
         public async Task<IEnumerable<Produto>> ObterPorCategoria(int codigo)
