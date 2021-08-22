@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NerdStore.Core.DomainObjects
 {
@@ -23,18 +21,18 @@ namespace NerdStore.Core.DomainObjects
             return Id.Equals(compareTo.Id);
         }
 
-        public static bool operator == (Entity a, Entity b)
+        public static bool operator ==(Entity a, Entity b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
-            
+
             if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
                 return false;
 
             return a.Equals(b);
         }
 
-        public static bool operator != (Entity a, Entity b)
+        public static bool operator !=(Entity a, Entity b)
         {
             return !(a == b);
         }
@@ -47,6 +45,11 @@ namespace NerdStore.Core.DomainObjects
         public override string ToString()
         {
             return $"{GetType().Name} [Id= {Id}]";
+        }
+
+        public virtual bool EhValido()
+        {
+            throw new NotImplementedException();
         }
 
     }
