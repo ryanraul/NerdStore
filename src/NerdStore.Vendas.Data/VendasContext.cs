@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NerdStore.Core.Communication.Mediator;
 using NerdStore.Core.Data;
 using NerdStore.Core.Messages;
 using NerdStore.Vendas.Domain;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using NerdStore.Core.Communication.Mediator;
 
 namespace NerdStore.Vendas.Data
 {
@@ -40,7 +40,8 @@ namespace NerdStore.Vendas.Data
             }
 
             var sucesso = await base.SaveChangesAsync() > 0;
-            //if (sucesso) await _mediatorHandler.PublicarEventos(this);
+
+            if (sucesso) await _mediatorHandler.PublicarEventos(this);
 
             return sucesso;
         }
